@@ -5,7 +5,7 @@
 
 [package]
 name = "stats"
-version = "0.2.0"
+version = "0.1.0"
 authors = ["Bader Alshaya <bart@cs.pdx.edu>"]
 edition = "2018"
 
