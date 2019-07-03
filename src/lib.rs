@@ -23,6 +23,10 @@ pub type StatFn = fn(&[f64]) -> Option<f64>;
 /// # use stats::*;
 /// assert_eq!(Some(0.0), mean(&[-1.0, 1.0]));
 /// ```
+/// ```
+/// # use stats::*;
+/// assert_eq!(Some(1.0), mean(&[1.0]));
+/// ```
 pub fn mean(nums: &[f64]) -> Option<f64> {
     if nums.is_empty() {
         Some(0.0)
@@ -49,9 +53,15 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 /// # use stats::*;
 /// assert_eq!(Some(0.0), stddev(&[1.0, 1.0]));
 /// ```
+/// ```
+/// # use stats::*;
+/// assert_eq!(Some(0.0), stddev(&[1.0]));
+/// ```
 pub fn stddev(nums: &[f64]) -> Option<f64> {
     if nums.is_empty() {
         None
+    } else if nums.len() == 1 {
+        Some(0.0)
     } else {
         let avg = mean(nums).unwrap();
         let mut sums = Vec::new();
@@ -75,6 +85,10 @@ pub fn stddev(nums: &[f64]) -> Option<f64> {
 /// ```
 /// # use stats::*;
 /// assert_eq!(Some(0.0), median(&[0.0, 0.5, -1.0, 1.0]));
+/// ```
+/// ```
+/// # use stats::*;
+/// assert_eq!(Some(5.0), median(&[5.0]));
 /// ```
 pub fn median(nums: &[f64]) -> Option<f64> {
     // Make a sorted copy of the input floats.
@@ -102,6 +116,10 @@ pub fn median(nums: &[f64]) -> Option<f64> {
 /// ```
 /// # use stats::*;
 /// assert_eq!(Some(5.0), l2(&[-3.0, 4.0]));
+/// ```
+/// ```
+/// # use stats::*;
+/// assert_eq!(Some(5.0), l2(&[5.0]));
 /// ```
 pub fn l2(nums: &[f64]) -> Option<f64> {
     if nums.is_empty() {
