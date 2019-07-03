@@ -6,7 +6,7 @@
 [package]
 name = "stats"
 version = "0.1.0"
-authors = ["Bader Alshaya <bart@cs.pdx.edu>"]
+authors = ["Bader Alshaya <alshayabader@gmail.com>"]
 edition = "2018"
 
 [dependencies]
