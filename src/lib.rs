@@ -24,7 +24,16 @@ pub type StatFn = fn(&[f64]) -> Option<f64>;
 /// assert_eq!(Some(0.0), mean(&[-1.0, 1.0]));
 /// ```
 pub fn mean(nums: &[f64]) -> Option<f64> {
-    unimplemented!("no mean yet")
+    if nums.is_empty() {
+        Some(0.0)
+    } else {
+        let len = nums.len() as f64;
+        let mut sum = 0.0;
+        for i in &nums[..] {
+            sum = sum + i;
+        }
+        Some(sum / len)
+    }
 }
 
 /// Population standard deviation of input values. The
@@ -41,7 +50,16 @@ pub fn mean(nums: &[f64]) -> Option<f64> {
 /// assert_eq!(Some(0.0), stddev(&[1.0, 1.0]));
 /// ```
 pub fn stddev(nums: &[f64]) -> Option<f64> {
-    unimplemented!("no stddev yet")
+    if nums.is_empty() {
+        None
+    } else {
+        let avg = mean(nums).unwrap();
+        let mut sums = Vec::new();
+        for i in &nums[..] {
+            sums.push((i - avg).powf(2.0));
+        }
+        Some(mean(&sums[..]).unwrap().sqrt())
+    }
 }
 
 /// Median value of input values, taking the value closer
@@ -64,7 +82,12 @@ pub fn median(nums: &[f64]) -> Option<f64> {
     // https://users.rust-lang.org/t/how-to-sort-a-vec-of-floats/2838/2
     nums.sort_by(|a, b| a.partial_cmp(b).unwrap());
 
-    unimplemented!("no median yet")
+    if nums.is_empty() {
+        None
+    } else {
+        let mid = (nums.len() - 1) / 2;
+        Some(nums[mid])
+    }
 }
 
 /// L2 norm (Euclidean norm) of input values. The L2
@@ -81,5 +104,13 @@ pub fn median(nums: &[f64]) -> Option<f64> {
 /// assert_eq!(Some(5.0), l2(&[-3.0, 4.0]));
 /// ```
 pub fn l2(nums: &[f64]) -> Option<f64> {
-    unimplemented!("no l2 yet")
+    if nums.is_empty() {
+        Some(0.0)
+    } else {
+        let mut sum = 0.0;
+        for i in &nums[..] {
+            sum = sum + i.powf(2.0);
+        }
+        Some(sum.sqrt())
+    }
 }
